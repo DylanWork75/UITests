@@ -1,14 +1,22 @@
 package Screens;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
+import Helpers.TestContext;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class GoogleHomeScreen {
-    public void goToHomePage(){
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+    WebDriver driver;
+    final private By searchBar = By.className("gLFyf");
+    public GoogleHomeScreen(TestContext testcontext) throws Exception {
+        driver = testcontext.getDriver();
+    }
+
+    public void goToHomePage() throws Exception{
         driver.get("https://www.google.com");
+    }
+    public void search(String searchTerm){
+        driver.findElement(searchBar).sendKeys(searchTerm);
+        driver.findElement(searchBar).sendKeys(Keys.ENTER);
     }
 
 }
